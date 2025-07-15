@@ -1,4 +1,4 @@
-<head> 
+jl<head> 
 <title> mlbb</title>
 <h1 class="text-2×1 font-bold">Belajar MLBB </h1>
 <!DOCTYPE html><html lang="id">
@@ -161,3 +161,89 @@
     render();
   </script></body>
   </html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Item MLBB Lengkap</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+</head>
+<body class="bg-gray-100 p-6">
+  <h1 class="text-2xl font-bold mb-4">Item Mobile Legends + Filter & Search</h1>
+  <div class="flex flex-col md:flex-row gap-4 mb-6">
+    <input id="searchInput" type="text" placeholder="Cari item..." class="w-full md:w-1/2 px-4 py-2 border rounded"/>
+    <select id="roleFilter" class="w-full md:w-1/4 px-4 py-2 border rounded">
+      <option value="">Semua Role</option>
+      <option value="Mage">Mage</option>
+      <option value="Tank">Tank</option>
+      <option value="Marksman">Marksman</option>
+      <option value="Fighter">Fighter</option>
+      <option value="Assassin">Assassin</option>
+      <option value="Support">Support</option>
+    </select>
+  </div>
+
+  <div id="itemContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+
+  <script>
+    const items = [
+      {name:"Blade of Despair",role:"Marksman",desc:"Physical Attack tertinggi untuk burst damage.",img:"https://static.wikia.nocookie.net/mobile-legends/images/7/7f/Blade_of_Despair.png"},
+      {name:"Endless Battle",role:"Marksman",desc:"Lifesteal, true damage, dan bonus damage.",img:"https://static.wikia.nocookie.net/mobile-legends/images/c/c5/Endless_Battle.png"},
+      {name:"Bloodlust Axe",role:"Fighter",desc:"Spell vamp untuk fighter fisik.",img:"https://static.wikia.nocookie.net/mobile-legends/images/5/5e/Bloodlust_Axe.png"},
+      {name:"War Axe",role:"Fighter",desc:"Stacking damage & cooldown reduction.",img:"https://static.wikia.nocookie.net/mobile-legends/images/b/b6/War_Axe.png"},
+      {name:"Hunter Strike",role:"Assassin",desc:"CDR + burst movement speed.",img:"https://static.wikia.nocookie.net/mobile-legends/images/2/28/Hunter_Strike.png"},
+      {name:"Malefic Roar",role:"Marksman",desc:"Physical penetration melawan tank.",img:"https://static.wikia.nocookie.net/mobile-legends/images/f/fe/Malefic_Roar.png"},
+      {name:"Sea Halberd",role:"Marksman",desc:"Anti regen terhadap hero sustain.",img:"https://static.wikia.nocookie.net/mobile-legends/images/f/f2/Sea_Halberd.png"},
+      {name:"Rose Gold Meteor",role:"Assassin",desc:"Shield otomatis saat HP rendah.",img:"https://static.wikia.nocookie.net/mobile-legends/images/7/7f/Rose_Gold_Meteor.png"},
+      {name:"Athena's Shield",role:"Tank",desc:"Pertahanan magic untuk lawan mage burst.",img:"https://static.wikia.nocookie.net/mobile-legends/images/b/b1/Athena%27s_Shield.png"},
+      {name:"Immortality",role:"Tank",desc:"Kesempatan hidup kembali, late‑game.",img:"https://static.wikia.nocookie.net/mobile-legends/images/8/85/Immortality.png"},
+      {name:"Brute Force Breastplate",role:"Tank",desc:"Stacking armor saat bergerak/serang.",img:"https://static.wikia.nocookie.net/mobile-legends/images/f/f5/Brute_Force_Breastplate.png"},
+      {name:"Antique Cuirass",role:"Tank",desc:"Kurangi physical damage lawan.",img:"https://static.wikia.nocookie.net/mobile-legends/images/2/2c/Antique_Cuirass.png"},
+      {name:"Radiant Armor",role:"Tank",desc:"Anti magic DPS sustain.",img:"https://static.wikia.nocookie.net/mobile-legends/images/b/bf/Radiant_Armor.png"},
+      {name:"Dominance Ice",role:"Tank",desc:"Kurangi lifesteal & attack speed.",img:"https://static.wikia.nocookie.net/mobile-legends/images/3/34/Dominance_Ice.png"},
+      {name:"Oracle",role:"Tank",desc:"Regen HP & shield bonus.",img:"https://static.wikia.nocookie.net/mobile-legends/images/b/b6/Oracle.png"},
+      {name:"Cursed Helmet",role:"Tank",desc:"Damage area ke musuh sekitar.",img:"https://static.wikia.nocookie.net/mobile-legends/images/d/d0/Cursed_Helmet.png"},
+      {name:"Twilight Armor",role:"Tank",desc:"Membatasi physical burst.",img:"https://static.wikia.nocookie.net/mobile-legends/images/f/f3/Twilight_Armor.png"},
+      {name:"Clock of Destiny",role:"Mage",desc:"Scaling magic power, HP, dan mana.",img:"https://static.wikia.nocookie.net/mobile-legends/images/8/86/Clock_of_Destiny.png"},
+      {name:"Lightning Truncheon",role:"Mage",desc:"Magic burst multi‑target.",img:"https://static.wikia.nocookie.net/mobile-legends/images/3/3f/Lightning_Truncheon.png"},
+      {name:"Holy Crystal",role:"Mage",desc:"Magic power tinggi untuk burst.",img:"https://static.wikia.nocookie.net/mobile-legends/images/f/f6/Holy_Crystal.png"},
+      {name:"Genius Wand",role:"Mage",desc:"Magic penetration vs tank.",img:"https://static.wikia.nocookie.net/mobile-legends/images/4/42/Genius_Wand.png"},
+      {name:"Glowing Wand",role:"Mage",desc:"Efek burn lawan sustain tinggi.",img:"https://static.wikia.nocookie.net/mobile-legends/images/6/6e/Glowing_Wand.png"},
+      {name:"Ice Queen Wand",role:"Mage",desc:"Skill slow untuk mage support.",img:"https://static.wikia.nocookie.net/mobile-legends/images/8/86/Ice_Queen_Wand.png"},
+      {name:"Concentrated Energy",role:"Mage",desc:"Spell vamp & regen dari skill.",img:"https://static.wikia.nocookie.net/mobile-legends/images/4/4e/Concentrated_Energy.png"}
+    ];
+
+    const container = document.getElementById("itemContainer");
+    const searchInput = document.getElementById("searchInput");
+    const roleFilter = document.getElementById("roleFilter");
+    function renderItems() {
+      const kw = searchInput.value.toLowerCase();
+      const role = roleFilter.value;
+      container.innerHTML = "";
+      const filt = items.filter(i =>
+        (i.name.toLowerCase().includes(kw) || i.desc.toLowerCase().includes(kw)) &&
+        (!role || i.role === role)
+      );
+      if (!filt.length) {
+        container.innerHTML = "<p class='text-gray-500'>Tidak ada item ditemukan.</p>";
+        return;
+      }
+      filt.forEach(i => {
+        const card = document.createElement("div");
+        card.className = "bg-white p-4 rounded shadow flex items-start space-x-4";
+        card.innerHTML = `
+          <img src="${i.img}" alt="${i.name}" class="w-16 h-16 rounded"/>
+          <div>
+            <h2 class="font-semibold text-lg">${i.name}</h2>
+            <p class="text-sm text-gray-700">${i.desc}</p>
+            <p class="text-xs mt-1 text-blue-500">${i.role}</p>
+          </div>`;
+        container.appendChild(card);
+      });
+    }
+    searchInput.addEventListener("input", renderItems);
+    roleFilter.addEventListener("change", renderItems);
+    renderItems();
+  </script>
+</body>
+</html>
