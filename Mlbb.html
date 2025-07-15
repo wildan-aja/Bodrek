@@ -1,17 +1,19 @@
-jl<head> 
-<title> mlbb</title>
-<h1 class="text-2×1 font-bold">Belajar MLBB </h1>
-<!DOCTYPE html><html lang="id">
+<!DOCTYPE html>
+<html lang="id">
 <head>
-  <meta charset="UTF-8"/>
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Counter Hero MLBB (All Heroes)</title>
+  <title>Belajar MLBB</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
 </head>
-<body class="bg-gray-100 min-h-screen p-4">
-  <div class="max-w-2xl mx-auto bg-white rounded-xl shadow-md p-4">
-    <h1 class="text-2xl font-extrabold text-blue-700 text-center mb-4">Counter Hero MLBB</h1>
-    <div class="flex space-x-2 mb-4">
+<body class="bg-gray-100 min-h-screen p-6">
+  <!-- Judul Halaman -->
+  <h1 class="text-2xl font-bold text-center mb-6">Belajar MLBB</h1>
+
+  <!-- COUNTER HERO SECTION -->
+  <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-md p-4 mb-10">
+    <h2 class="text-xl font-extrabold text-blue-700 text-center mb-4">Counter Hero MLBB</h2>
+    <div class="flex flex-col md:flex-row gap-4 mb-4">
       <input id="search" type="text" placeholder="Cari hero..." class="flex-1 px-3 py-2 border rounded"/>
       <select id="filterLane" class="px-3 py-2 border rounded">
         <option value="">Semua Lane</option>
@@ -25,207 +27,78 @@ jl<head>
     </div>
     <p id="resultCount" class="text-sm text-gray-600 mb-2 text-right"></p>
     <div id="heroContainer" class="space-y-4"></div>
-  </div>  <script>
-    const heroData = [
-      { hero: "Granger", lane: "Gold", counter: ["Irithel","Moskov"] },
-      { hero: "Wanwan", lane: "Gold", counter: ["Popol & Kupa","Lesley"] },
-      { hero: "Brody", lane: "Gold", counter: ["Wanwan","Claude"] },
-      { hero: "Beatrix", lane: "Gold", counter: ["Lesley","Natalia"] },
-      { hero: "Claude", lane: "Gold", counter: ["Moskov","Karrie"] },
-      { hero: "Moskov", lane: "Gold", counter: ["Brody", "Lesley"] },
-      { hero: "Lesley", lane: "Gold", counter: ["Natalia", "Beatrix"] },
-      { hero: "Karrie", lane: "Gold", counter: ["Wanwan", "Claude"] },
-      { hero: "Melissa", lane: "Gold", counter: ["Beatrix", "Lesley"] },
-      { hero: "Natan", lane: "Gold", counter: ["Clint", "Bruno"] },
-      { hero: "Irithel", lane: "Gold", counter: ["Claude", "Melissa"] },
-      { hero: "Hanabi", lane: "Gold", counter: ["Lesley", "Popol & Kupa"] },
-      { hero: "Popol & Kupa", lane: "Gold", counter: ["Beatrix", "Brody"] },
+  </div>
 
-      { hero: "Lapu-Lapu", lane: "EXP", counter: ["Dyrroth","Alice"] },
-      { hero: "Paquito", lane: "EXP", counter: ["Yu Zhong","Aldous"] },
-      { hero: "Terizla", lane: "EXP", counter: ["Esmeralda","Thamuz"] },
-      { hero: "Dyrroth", lane: "EXP", counter: ["Alpha","Baxia"] },
-      { hero: "X.Borg", lane: "EXP", counter: ["Thamuz","Benedetta"] },
-      { hero: "Yu Zhong", lane: "EXP", counter: ["X.Borg", "Lapu-Lapu"] },
-      { hero: "Thamuz", lane: "EXP", counter: ["Yu Zhong", "Paquito"] },
-      { hero: "Esmeralda", lane: "EXP", counter: ["Baxia", "Dyrroth"] },
-      { hero: "Aldous", lane: "EXP", counter: ["Chou", "X.Borg"] },
-      { hero: "Chou", lane: "EXP", counter: ["Paquito", "Lapu-Lapu"] },
-      { hero: "Leomord", lane: "EXP", counter: ["Esmeralda", "Chou"] },
-      { hero: "Fredrinn", lane: "EXP", counter: ["Dyrroth", "Yin"] },
-      { hero: "Arlott", lane: "EXP", counter: ["Yu Zhong", "Paquito"] },
-      { hero: "Yin", lane: "EXP", counter: ["Chou", "Martis"] },
-      { hero: "Guinevere", lane: "EXP", counter: ["Lylia", "Diggie"] },
-      { hero: "Minsitthar", lane: "EXP", counter: ["Chou", "Yu Zhong"] },
-      { hero: "Martis", lane: "EXP", counter: ["Yu Zhong", "Terizla"] },
-      { hero: "Khaleed", lane: "EXP", counter: ["Thamuz", "X.Borg"] },
-      { hero: "Silvanna", lane: "EXP", counter: ["Chou", "Yu Zhong"] },
-      { hero: "Bane", lane: "EXP", counter: ["X.Borg", "Thamuz"] },
-      { hero: "Badang", lane: "EXP", counter: ["Yu Zhong", "Fredrinn"] },
-      { hero: "Uranus", lane: "EXP", counter: ["Esmeralda", "Dyrroth"] },
+  <!-- ITEM SECTION -->
+  <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-md p-4">
+    <h2 class="text-xl font-bold text-center mb-6">Item Mobile Legends + Filter & Search</h2>
+    <div class="flex flex-col md:flex-row gap-4 mb-6">
+      <input id="searchInput" type="text" placeholder="Cari item..." class="w-full md:w-1/2 px-4 py-2 border rounded"/>
+      <select id="roleFilter" class="w-full md:w-1/4 px-4 py-2 border rounded">
+        <option value="">Semua Role</option>
+        <option value="Mage">Mage</option>
+        <option value="Tank">Tank</option>
+        <option value="Marksman">Marksman</option>
+        <option value="Fighter">Fighter</option>
+        <option value="Assassin">Assassin</option>
+        <option value="Support">Support</option>
+      </select>
+    </div>
+    <div id="itemContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+  </div>
 
-      { hero: "Valir", lane: "Mid", counter: ["Lylia","Natalia"] },
-      { hero: "Lunox", lane: "Mid", counter: ["Kagura","Hayabusa"] },
-      { hero: "Pharsa", lane: "Mid", counter: ["Hayabusa","Harith"] },
-      { hero: "Yve", lane: "Mid", counter: ["Natalia","Vale"] },
-      { hero: "Cecilion", lane: "Mid", counter: ["Harith","Kagura"] },
-      { hero: "Vale", lane: "Mid", counter: ["Natalia", "Lancelot"] },
-      { hero: "Harith", lane: "Mid", counter: ["Valir", "Lylia"] },
-      { hero: "Kagura", lane: "Mid", counter: ["Valentina", "Yve"] },
-      { hero: "Lylia", lane: "Mid", counter: ["Valentina", "Yve"] },
-      { hero: "Valentina", lane: "Mid", counter: ["Lunox", "Gusion"] },
-      { hero: "Joy", lane: "Mid", counter: ["Pharsa", "Kaja"] },
-      { hero: "Julian", lane: "Mid", counter: ["Valir", "Gusion"] },
-      { hero: "Zhuxin", lane: "Mid", counter: ["Natalia", "Lunox"] },
-      { hero: "Novaria", lane: "Mid", counter: ["Yve", "Pharsa"] },
-      { hero: "Helena", lane: "Mid", counter: ["Lylia", "Harith"] },
-
-      { hero: "Ling", lane: "Jungle", counter: ["Saber","Khufra"] },
-      { hero: "Lancelot", lane: "Jungle", counter: ["Akai","Aurora"] },
-      { hero: "Fanny", lane: "Jungle", counter: ["Khufra","Guinevere"] },
-      { hero: "Gusion", lane: "Jungle", counter: ["Chou"] },
-      { hero: "Karina", lane: "Jungle", counter: ["Baxia","Uranus"] },
-      { hero: "Alucard", lane: "Jungle", counter: ["Belerick","Khufra"] },
-      { hero: "Hayabusa", lane: "Jungle", counter: ["Saber", "Aurora"] },
-      { hero: "Saber", lane: "Jungle", counter: ["Akai", "Belerick"] },
-      { hero: "Akai", lane: "Jungle", counter: ["Karrie", "Valir"] },
-      { hero: "Helcurt", lane: "Jungle", counter: ["Jawhead", "Khufra"] },
-      { hero: "Benedetta", lane: "Jungle", counter: ["Chou", "Natalia"] },
-      { hero: "Nolan", lane: "Jungle", counter: ["Benedetta", "Akai"] },
-      { hero: "Aamon", lane: "Jungle", counter: ["Hayabusa", "Saber"] },
-      { hero: "Aulus", lane: "Jungle", counter: ["Akai", "Baxia"] },
-      { hero: "Roger", lane: "Jungle", counter: ["Khufra", "Barats"] },
-
-      { hero: "Angela", lane: "Support", counter: ["Ling","Selena"] },
-      { hero: "Estes", lane: "Support", counter: ["Karina","Cyclops"] },
-      { hero: "Tigreal", lane: "Support", counter: ["Harith","Grock"] },
-      { hero: "Rafaela", lane: "Support", counter: ["Helcurt","Valentina"] },
-      { hero: "Selena", lane: "Support", counter: ["Estes", "Angela"] },
-      { hero: "Lolita", lane: "Support", counter: ["Beatrix", "Brody"] },
-      { hero: "Franco", lane: "Support", counter: ["Claude", "Beatrix"] },
-      { hero: "Diggie", lane: "Support", counter: ["Tigreal", "Atlas"] },
-      { hero: "Atlas", lane: "Support", counter: ["Diggie", "Chou"] },
-      { hero: "Chip", lane: "Support", counter: ["Atlas", "Angela"] },
-      { hero: "Floryn", lane: "Support", counter: ["Valentina", "Diggie"] },
-      { hero: "Carmilla", lane: "Support", counter: ["Diggie", "Selena"] },
-      { hero: "Faramis", lane: "Support", counter: ["Valir", "Pharsa"] },
-
-      { hero: "Baxia", lane: "Tank", counter: ["Esmeralda", "Estes"] },
-      { hero: "Grock", lane: "Tank", counter: ["Fanny", "Gusion"] },
-      { hero: "Belerick", lane: "Tank", counter: ["Lancelot", "Gusion"] },
-      { hero: "Edith", lane: "Tank", counter: ["Esmeralda", "Harith"] },
-      { hero: "Barats", lane: "Tank", counter: ["Dyrroth", "X.Borg"] },
-      { hero: "Johnson", lane: "Tank", counter: ["Chou", "Akai"] },
-      { hero: "Hylos", lane: "Tank", counter: ["Karrie", "Valir"] },
-      { hero: "Minotaur", lane: "Tank", counter: ["Diggie", "Grock"] }
-    ];
-
-    const container = document.getElementById("heroContainer");
+  <!-- SCRIPT -->
+  <script>
+    // HERO COUNTER DATA & RENDER
+    const heroData = [...]; // gunakan array heroData dari kode kamu
+    const heroContainer = document.getElementById("heroContainer");
     const searchInput = document.getElementById("search");
     const filterLane = document.getElementById("filterLane");
     const resultCount = document.getElementById("resultCount");
 
-    function render() {
+    function renderHeroes() {
       const keyword = searchInput.value.toLowerCase();
       const lane = filterLane.value;
-      container.innerHTML = "";
-
+      heroContainer.innerHTML = "";
       const filtered = heroData.filter(h =>
-        (!lane || h.lane === lane) &&
-        (!keyword || h.hero.toLowerCase().includes(keyword))
+        (!lane || h.lane === lane) && (!keyword || h.hero.toLowerCase().includes(keyword))
       );
-
       resultCount.textContent = `${filtered.length} hero ditemukan`;
-
+      if (!filtered.length) {
+        heroContainer.innerHTML = "<p class='text-center text-gray-500'>Tidak ada hero sesuai filter.</p>";
+        return;
+      }
       filtered.forEach(h => {
         const card = document.createElement("div");
         card.className = "bg-gray-50 rounded-lg p-3 shadow-sm";
-
         card.innerHTML = `
           <h3 class="text-lg font-semibold">${h.hero}</h3>
           <p class="text-sm text-gray-500 mb-1">${h.lane} Lane</p>
-          <p class="text-sm"><span class="font-bold text-red-500">Counter:</span> ${h.counter.join(", ")}</p>
-        `;
-        container.appendChild(card);
+          <p class="text-sm"><span class="font-bold text-red-500">Counter:</span> ${h.counter.join(", ")}</p>`;
+        heroContainer.appendChild(card);
       });
-
-      if (filtered.length === 0) {
-        container.innerHTML = "<p class='text-center text-gray-500'>Tidak ada hero sesuai filter.</p>";
-        resultCount.textContent = "0 hero ditemukan";
-      }
     }
 
-    searchInput.addEventListener("input", render);
-    filterLane.addEventListener("change", render);
+    searchInput.addEventListener("input", renderHeroes);
+    filterLane.addEventListener("change", renderHeroes);
+    renderHeroes();
 
-    render();
-  </script></body>
-  </html>
-<html lang="id">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Item MLBB Lengkap</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
-</head>
-<body class="bg-gray-100 p-6">
-  <h1 class="text-2xl font-bold mb-4">Item Mobile Legends + Filter & Search</h1>
-  <div class="flex flex-col md:flex-row gap-4 mb-6">
-    <input id="searchInput" type="text" placeholder="Cari item..." class="w-full md:w-1/2 px-4 py-2 border rounded"/>
-    <select id="roleFilter" class="w-full md:w-1/4 px-4 py-2 border rounded">
-      <option value="">Semua Role</option>
-      <option value="Mage">Mage</option>
-      <option value="Tank">Tank</option>
-      <option value="Marksman">Marksman</option>
-      <option value="Fighter">Fighter</option>
-      <option value="Assassin">Assassin</option>
-      <option value="Support">Support</option>
-    </select>
-  </div>
-
-  <div id="itemContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
-
-  <script>
-    const items = [
-      {name:"Blade of Despair",role:"Marksman",desc:"Physical Attack tertinggi untuk burst damage.",img:"https://static.wikia.nocookie.net/mobile-legends/images/7/7f/Blade_of_Despair.png"},
-      {name:"Endless Battle",role:"Marksman",desc:"Lifesteal, true damage, dan bonus damage.",img:"https://static.wikia.nocookie.net/mobile-legends/images/c/c5/Endless_Battle.png"},
-      {name:"Bloodlust Axe",role:"Fighter",desc:"Spell vamp untuk fighter fisik.",img:"https://static.wikia.nocookie.net/mobile-legends/images/5/5e/Bloodlust_Axe.png"},
-      {name:"War Axe",role:"Fighter",desc:"Stacking damage & cooldown reduction.",img:"https://static.wikia.nocookie.net/mobile-legends/images/b/b6/War_Axe.png"},
-      {name:"Hunter Strike",role:"Assassin",desc:"CDR + burst movement speed.",img:"https://static.wikia.nocookie.net/mobile-legends/images/2/28/Hunter_Strike.png"},
-      {name:"Malefic Roar",role:"Marksman",desc:"Physical penetration melawan tank.",img:"https://static.wikia.nocookie.net/mobile-legends/images/f/fe/Malefic_Roar.png"},
-      {name:"Sea Halberd",role:"Marksman",desc:"Anti regen terhadap hero sustain.",img:"https://static.wikia.nocookie.net/mobile-legends/images/f/f2/Sea_Halberd.png"},
-      {name:"Rose Gold Meteor",role:"Assassin",desc:"Shield otomatis saat HP rendah.",img:"https://static.wikia.nocookie.net/mobile-legends/images/7/7f/Rose_Gold_Meteor.png"},
-      {name:"Athena's Shield",role:"Tank",desc:"Pertahanan magic untuk lawan mage burst.",img:"https://static.wikia.nocookie.net/mobile-legends/images/b/b1/Athena%27s_Shield.png"},
-      {name:"Immortality",role:"Tank",desc:"Kesempatan hidup kembali, late‑game.",img:"https://static.wikia.nocookie.net/mobile-legends/images/8/85/Immortality.png"},
-      {name:"Brute Force Breastplate",role:"Tank",desc:"Stacking armor saat bergerak/serang.",img:"https://static.wikia.nocookie.net/mobile-legends/images/f/f5/Brute_Force_Breastplate.png"},
-      {name:"Antique Cuirass",role:"Tank",desc:"Kurangi physical damage lawan.",img:"https://static.wikia.nocookie.net/mobile-legends/images/2/2c/Antique_Cuirass.png"},
-      {name:"Radiant Armor",role:"Tank",desc:"Anti magic DPS sustain.",img:"https://static.wikia.nocookie.net/mobile-legends/images/b/bf/Radiant_Armor.png"},
-      {name:"Dominance Ice",role:"Tank",desc:"Kurangi lifesteal & attack speed.",img:"https://static.wikia.nocookie.net/mobile-legends/images/3/34/Dominance_Ice.png"},
-      {name:"Oracle",role:"Tank",desc:"Regen HP & shield bonus.",img:"https://static.wikia.nocookie.net/mobile-legends/images/b/b6/Oracle.png"},
-      {name:"Cursed Helmet",role:"Tank",desc:"Damage area ke musuh sekitar.",img:"https://static.wikia.nocookie.net/mobile-legends/images/d/d0/Cursed_Helmet.png"},
-      {name:"Twilight Armor",role:"Tank",desc:"Membatasi physical burst.",img:"https://static.wikia.nocookie.net/mobile-legends/images/f/f3/Twilight_Armor.png"},
-      {name:"Clock of Destiny",role:"Mage",desc:"Scaling magic power, HP, dan mana.",img:"https://static.wikia.nocookie.net/mobile-legends/images/8/86/Clock_of_Destiny.png"},
-      {name:"Lightning Truncheon",role:"Mage",desc:"Magic burst multi‑target.",img:"https://static.wikia.nocookie.net/mobile-legends/images/3/3f/Lightning_Truncheon.png"},
-      {name:"Holy Crystal",role:"Mage",desc:"Magic power tinggi untuk burst.",img:"https://static.wikia.nocookie.net/mobile-legends/images/f/f6/Holy_Crystal.png"},
-      {name:"Genius Wand",role:"Mage",desc:"Magic penetration vs tank.",img:"https://static.wikia.nocookie.net/mobile-legends/images/4/42/Genius_Wand.png"},
-      {name:"Glowing Wand",role:"Mage",desc:"Efek burn lawan sustain tinggi.",img:"https://static.wikia.nocookie.net/mobile-legends/images/6/6e/Glowing_Wand.png"},
-      {name:"Ice Queen Wand",role:"Mage",desc:"Skill slow untuk mage support.",img:"https://static.wikia.nocookie.net/mobile-legends/images/8/86/Ice_Queen_Wand.png"},
-      {name:"Concentrated Energy",role:"Mage",desc:"Spell vamp & regen dari skill.",img:"https://static.wikia.nocookie.net/mobile-legends/images/4/4e/Concentrated_Energy.png"}
-    ];
-
-    const container = document.getElementById("itemContainer");
-    const searchInput = document.getElementById("searchInput");
+    // ITEM DATA & RENDER
+    const items = [...]; // gunakan array items dari kode kamu
+    const itemContainer = document.getElementById("itemContainer");
+    const itemSearch = document.getElementById("searchInput");
     const roleFilter = document.getElementById("roleFilter");
+
     function renderItems() {
-      const kw = searchInput.value.toLowerCase();
+      const kw = itemSearch.value.toLowerCase();
       const role = roleFilter.value;
-      container.innerHTML = "";
+      itemContainer.innerHTML = "";
       const filt = items.filter(i =>
         (i.name.toLowerCase().includes(kw) || i.desc.toLowerCase().includes(kw)) &&
         (!role || i.role === role)
       );
       if (!filt.length) {
-        container.innerHTML = "<p class='text-gray-500'>Tidak ada item ditemukan.</p>";
+        itemContainer.innerHTML = "<p class='text-gray-500'>Tidak ada item ditemukan.</p>";
         return;
       }
       filt.forEach(i => {
@@ -238,10 +111,11 @@ jl<head>
             <p class="text-sm text-gray-700">${i.desc}</p>
             <p class="text-xs mt-1 text-blue-500">${i.role}</p>
           </div>`;
-        container.appendChild(card);
+        itemContainer.appendChild(card);
       });
     }
-    searchInput.addEventListener("input", renderItems);
+
+    itemSearch.addEventListener("input", renderItems);
     roleFilter.addEventListener("change", renderItems);
     renderItems();
   </script>
