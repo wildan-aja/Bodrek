@@ -1,19 +1,17 @@
-<!DOCTYPE html>
-<html lang="id">
+<head> 
+<title> mlbb</title>
+<h1 class="text-2×1 font-bold">Belajar MLBB </h1>
+<!DOCTYPE html><html lang="id">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Belajar MLBB</title>
+  <title>Counter Hero MLBB (All Heroes)</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
 </head>
-<body class="bg-gray-100 min-h-screen p-6">
-  <!-- Judul Halaman -->
-  <h1 class="text-2xl font-bold text-center mb-6">Belajar MLBB</h1>
-
-  <!-- COUNTER HERO SECTION -->
-  <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-md p-4 mb-10">
-    <h2 class="text-xl font-extrabold text-blue-700 text-center mb-4">Counter Hero MLBB</h2>
-    <div class="flex flex-col md:flex-row gap-4 mb-4">
+<body class="bg-gray-100 min-h-screen p-4">
+  <div class="max-w-2xl mx-auto bg-white rounded-xl shadow-md p-4">
+    <h1 class="text-2xl font-extrabold text-blue-700 text-center mb-4">Counter Hero MLBB</h1>
+    <div class="flex space-x-2 mb-4">
       <input id="search" type="text" placeholder="Cari hero..." class="flex-1 px-3 py-2 border rounded"/>
       <select id="filterLane" class="px-3 py-2 border rounded">
         <option value="">Semua Lane</option>
@@ -27,97 +25,365 @@
     </div>
     <p id="resultCount" class="text-sm text-gray-600 mb-2 text-right"></p>
     <div id="heroContainer" class="space-y-4"></div>
-  </div>
+  </div>  <script>
+    const heroData = [
+      { hero: "Granger", lane: "Gold", counter: ["Irithel","Moskov"] },
+      { hero: "Wanwan", lane: "Gold", counter: ["Popol & Kupa","Lesley"] },
+      { hero: "Brody", lane: "Gold", counter: ["Wanwan","Claude"] },
+      { hero: "Beatrix", lane: "Gold", counter: ["Lesley","Natalia"] },
+      { hero: "Claude", lane: "Gold", counter: ["Moskov","Karrie"] },
+      { hero: "Moskov", lane: "Gold", counter: ["Brody", "Lesley"] },
+      { hero: "Lesley", lane: "Gold", counter: ["Natalia", "Beatrix"] },
+      { hero: "Karrie", lane: "Gold", counter: ["Wanwan", "Claude"] },
+      { hero: "Melissa", lane: "Gold", counter: ["Beatrix", "Lesley"] },
+      { hero: "Natan", lane: "Gold", counter: ["Clint", "Bruno"] },
+      { hero: "Irithel", lane: "Gold", counter: ["Claude", "Melissa"] },
+      { hero: "Hanabi", lane: "Gold", counter: ["Lesley", "Popol & Kupa"] },
+      { hero: "Popol & Kupa", lane: "Gold", counter: ["Beatrix", "Brody"] },
 
-  <!-- ITEM SECTION -->
-  <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-md p-4">
-    <h2 class="text-xl font-bold text-center mb-6">Item Mobile Legends + Filter & Search</h2>
-    <div class="flex flex-col md:flex-row gap-4 mb-6">
-      <input id="searchInput" type="text" placeholder="Cari item..." class="w-full md:w-1/2 px-4 py-2 border rounded"/>
-      <select id="roleFilter" class="w-full md:w-1/4 px-4 py-2 border rounded">
-        <option value="">Semua Role</option>
-        <option value="Mage">Mage</option>
-        <option value="Tank">Tank</option>
-        <option value="Marksman">Marksman</option>
-        <option value="Fighter">Fighter</option>
-        <option value="Assassin">Assassin</option>
-        <option value="Support">Support</option>
-      </select>
-    </div>
-    <div id="itemContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
-  </div>
+      { hero: "Lapu-Lapu", lane: "EXP", counter: ["Dyrroth","Alice"] },
+      { hero: "Paquito", lane: "EXP", counter: ["Yu Zhong","Aldous"] },
+      { hero: "Terizla", lane: "EXP", counter: ["Esmeralda","Thamuz"] },
+      { hero: "Dyrroth", lane: "EXP", counter: ["Alpha","Baxia"] },
+      { hero: "X.Borg", lane: "EXP", counter: ["Thamuz","Benedetta"] },
+      { hero: "Yu Zhong", lane: "EXP", counter: ["X.Borg", "Lapu-Lapu"] },
+      { hero: "Thamuz", lane: "EXP", counter: ["Yu Zhong", "Paquito"] },
+      { hero: "Esmeralda", lane: "EXP", counter: ["Baxia", "Dyrroth"] },
+      { hero: "Aldous", lane: "EXP", counter: ["Chou", "X.Borg"] },
+      { hero: "Chou", lane: "EXP", counter: ["Paquito", "Lapu-Lapu"] },
+      { hero: "Leomord", lane: "EXP", counter: ["Esmeralda", "Chou"] },
+      { hero: "Fredrinn", lane: "EXP", counter: ["Dyrroth", "Yin"] },
+      { hero: "Arlott", lane: "EXP", counter: ["Yu Zhong", "Paquito"] },
+      { hero: "Yin", lane: "EXP", counter: ["Chou", "Martis"] },
+      { hero: "Guinevere", lane: "EXP", counter: ["Lylia", "Diggie"] },
+      { hero: "Minsitthar", lane: "EXP", counter: ["Chou", "Yu Zhong"] },
+      { hero: "Martis", lane: "EXP", counter: ["Yu Zhong", "Terizla"] },
+      { hero: "Khaleed", lane: "EXP", counter: ["Thamuz", "X.Borg"] },
+      { hero: "Silvanna", lane: "EXP", counter: ["Chou", "Yu Zhong"] },
+      { hero: "Bane", lane: "EXP", counter: ["X.Borg", "Thamuz"] },
+      { hero: "Badang", lane: "EXP", counter: ["Yu Zhong", "Fredrinn"] },
+      { hero: "Uranus", lane: "EXP", counter: ["Esmeralda", "Dyrroth"] },
 
-  <!-- SCRIPT -->
-  <script>
-    // HERO COUNTER DATA & RENDER
-    const heroData = [...]; // gunakan array heroData dari kode kamu
-    const heroContainer = document.getElementById("heroContainer");
+      { hero: "Valir", lane: "Mid", counter: ["Lylia","Natalia"] },
+      { hero: "Lunox", lane: "Mid", counter: ["Kagura","Hayabusa"] },
+      { hero: "Pharsa", lane: "Mid", counter: ["Hayabusa","Harith"] },
+      { hero: "Yve", lane: "Mid", counter: ["Natalia","Vale"] },
+      { hero: "Cecilion", lane: "Mid", counter: ["Harith","Kagura"] },
+      { hero: "Vale", lane: "Mid", counter: ["Natalia", "Lancelot"] },
+      { hero: "Harith", lane: "Mid", counter: ["Valir", "Lylia"] },
+      { hero: "Kagura", lane: "Mid", counter: ["Valentina", "Yve"] },
+      { hero: "Lylia", lane: "Mid", counter: ["Valentina", "Yve"] },
+      { hero: "Valentina", lane: "Mid", counter: ["Lunox", "Gusion"] },
+      { hero: "Joy", lane: "Mid", counter: ["Pharsa", "Kaja"] },
+      { hero: "Julian", lane: "Mid", counter: ["Valir", "Gusion"] },
+      { hero: "Zhuxin", lane: "Mid", counter: ["Natalia", "Lunox"] },
+      { hero: "Novaria", lane: "Mid", counter: ["Yve", "Pharsa"] },
+      { hero: "Helena", lane: "Mid", counter: ["Lylia", "Harith"] },
+
+      { hero: "Ling", lane: "Jungle", counter: ["Saber","Khufra"] },
+      { hero: "Lancelot", lane: "Jungle", counter: ["Akai","Aurora"] },
+      { hero: "Fanny", lane: "Jungle", counter: ["Khufra","Guinevere"] },
+      { hero: "Gusion", lane: "Jungle", counter: ["Chou"] },
+      { hero: "Karina", lane: "Jungle", counter: ["Baxia","Uranus"] },
+      { hero: "Alucard", lane: "Jungle", counter: ["Belerick","Khufra"] },
+      { hero: "Hayabusa", lane: "Jungle", counter: ["Saber", "Aurora"] },
+      { hero: "Saber", lane: "Jungle", counter: ["Akai", "Belerick"] },
+      { hero: "Akai", lane: "Jungle", counter: ["Karrie", "Valir"] },
+      { hero: "Helcurt", lane: "Jungle", counter: ["Jawhead", "Khufra"] },
+      { hero: "Benedetta", lane: "Jungle", counter: ["Chou", "Natalia"] },
+      { hero: "Nolan", lane: "Jungle", counter: ["Benedetta", "Akai"] },
+      { hero: "Aamon", lane: "Jungle", counter: ["Hayabusa", "Saber"] },
+      { hero: "Aulus", lane: "Jungle", counter: ["Akai", "Baxia"] },
+      { hero: "Roger", lane: "Jungle", counter: ["Khufra", "Barats"] },
+
+      { hero: "Angela", lane: "Support", counter: ["Ling","Selena"] },
+      { hero: "Estes", lane: "Support", counter: ["Karina","Cyclops"] },
+      { hero: "Tigreal", lane: "Support", counter: ["Harith","Grock"] },
+      { hero: "Rafaela", lane: "Support", counter: ["Helcurt","Valentina"] },
+      { hero: "Selena", lane: "Support", counter: ["Estes", "Angela"] },
+      { hero: "Lolita", lane: "Support", counter: ["Beatrix", "Brody"] },
+      { hero: "Franco", lane: "Support", counter: ["Claude", "Beatrix"] },
+      { hero: "Diggie", lane: "Support", counter: ["Tigreal", "Atlas"] },
+      { hero: "Atlas", lane: "Support", counter: ["Diggie", "Chou"] },
+      { hero: "Chip", lane: "Support", counter: ["Atlas", "Angela"] },
+      { hero: "Floryn", lane: "Support", counter: ["Valentina", "Diggie"] },
+      { hero: "Carmilla", lane: "Support", counter: ["Diggie", "Selena"] },
+      { hero: "Faramis", lane: "Support", counter: ["Valir", "Pharsa"] },
+
+      { hero: "Baxia", lane: "Tank", counter: ["Esmeralda", "Estes"] },
+      { hero: "Grock", lane: "Tank", counter: ["Fanny", "Gusion"] },
+      { hero: "Belerick", lane: "Tank", counter: ["Lancelot", "Gusion"] },
+      { hero: "Edith", lane: "Tank", counter: ["Esmeralda", "Harith"] },
+      { hero: "Barats", lane: "Tank", counter: ["Dyrroth", "X.Borg"] },
+      { hero: "Johnson", lane: "Tank", counter: ["Chou", "Akai"] },
+      { hero: "Hylos", lane: "Tank", counter: ["Karrie", "Valir"] },
+      { hero: "Minotaur", lane: "Tank", counter: ["Diggie", "Grock"] }
+    ];
+
+    const container = document.getElementById("heroContainer");
     const searchInput = document.getElementById("search");
     const filterLane = document.getElementById("filterLane");
     const resultCount = document.getElementById("resultCount");
 
-    function renderHeroes() {
+    function render() {
       const keyword = searchInput.value.toLowerCase();
       const lane = filterLane.value;
-      heroContainer.innerHTML = "";
+      container.innerHTML = "";
+
       const filtered = heroData.filter(h =>
-        (!lane || h.lane === lane) && (!keyword || h.hero.toLowerCase().includes(keyword))
+        (!lane || h.lane === lane) &&
+        (!keyword || h.hero.toLowerCase().includes(keyword))
       );
+
       resultCount.textContent = `${filtered.length} hero ditemukan`;
-      if (!filtered.length) {
-        heroContainer.innerHTML = "<p class='text-center text-gray-500'>Tidak ada hero sesuai filter.</p>";
-        return;
-      }
+
       filtered.forEach(h => {
         const card = document.createElement("div");
         card.className = "bg-gray-50 rounded-lg p-3 shadow-sm";
+
         card.innerHTML = `
           <h3 class="text-lg font-semibold">${h.hero}</h3>
           <p class="text-sm text-gray-500 mb-1">${h.lane} Lane</p>
-          <p class="text-sm"><span class="font-bold text-red-500">Counter:</span> ${h.counter.join(", ")}</p>`;
-        heroContainer.appendChild(card);
+          <p class="text-sm"><span class="font-bold text-red-500">Counter:</span> ${h.counter.join(", ")}</p>
+        `;
+        container.appendChild(card);
       });
-    }
 
-    searchInput.addEventListener("input", renderHeroes);
-    filterLane.addEventListener("change", renderHeroes);
-    renderHeroes();
-
-    // ITEM DATA & RENDER
-    const items = [...]; // gunakan array items dari kode kamu
-    const itemContainer = document.getElementById("itemContainer");
-    const itemSearch = document.getElementById("searchInput");
-    const roleFilter = document.getElementById("roleFilter");
-
-    function renderItems() {
-      const kw = itemSearch.value.toLowerCase();
-      const role = roleFilter.value;
-      itemContainer.innerHTML = "";
-      const filt = items.filter(i =>
-        (i.name.toLowerCase().includes(kw) || i.desc.toLowerCase().includes(kw)) &&
-        (!role || i.role === role)
-      );
-      if (!filt.length) {
-        itemContainer.innerHTML = "<p class='text-gray-500'>Tidak ada item ditemukan.</p>";
-        return;
+      if (filtered.length === 0) {
+        container.innerHTML = "<p class='text-center text-gray-500'>Tidak ada hero sesuai filter.</p>";
+        resultCount.textContent = "0 hero ditemukan";
       }
-      filt.forEach(i => {
-        const card = document.createElement("div");
-        card.className = "bg-white p-4 rounded shadow flex items-start space-x-4";
-        card.innerHTML = `
-          <img src="${i.img}" alt="${i.name}" class="w-16 h-16 rounded"/>
-          <div>
-            <h2 class="font-semibold text-lg">${i.name}</h2>
-            <p class="text-sm text-gray-700">${i.desc}</p>
-            <p class="text-xs mt-1 text-blue-500">${i.role}</p>
-          </div>`;
-        itemContainer.appendChild(card);
-      });
     }
 
-    itemSearch.addEventListener("input", renderItems);
-    roleFilter.addEventListener("change", renderItems);
-    renderItems();
-  </script>
-</body>
+    searchInput.addEventListener("input", render);
+    filterLane.addEventListener("change", render);
+
+    render();
+  </script></body>
 </html>
+
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Penjelasan Item MLBB</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 p-6">
+  <h1 class="text-2xl font-bold mb-6">Penjelasan Singkat Item Mobile Legends</h1>
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+    <!-- Mulai Item -->
+    <!-- Blade of Despair -->
+    <div class="bg-white p-4 rounded shadow flex items-start space-x-4">
+      <img src="https://static.wikia.nocookie.net/mobile-legends/images/7/7f/Blade_of_Despair.png" alt="Blade of Despair" class="w-16 h-16 rounded">
+      <div>
+        <h2 class="font-semibold text-lg">Blade of Despair</h2>
+        <p>Item Physical Attack tertinggi. Cocok untuk hero marksman dan assassin agar burst damage lebih besar.</p>
+      </div>
+    </div>
+
+    <!-- Endless Battle -->
+    <div class="bg-white p-4 rounded shadow flex items-start space-x-4">
+      <img src="https://static.wikia.nocookie.net/mobile-legends/images/c/c5/Endless_Battle.png" alt="Endless Battle" class="w-16 h-16 rounded">
+      <div>
+        <h2 class="font-semibold text-lg">Endless Battle</h2>
+        <p>Memberikan lifesteal, true damage, dan movement speed. Cocok untuk fighter dan core physical.</p>
+      </div>
+    </div>
+
+    <!-- Athena's Shield -->
+    <div class="bg-white p-4 rounded shadow flex items-start space-x-4">
+      <img src="https://static.wikia.nocookie.net/mobile-legends/images/b/b1/Athena%27s_Shield.png" alt="Athena's Shield" class="w-16 h-16 rounded">
+      <div>
+        <h2 class="font-semibold text-lg">Athena's Shield</h2>
+        <p>Item pertahanan magic. Cocok untuk melawan mage burst seperti Eudora dan Kadita.</p>
+      </div>
+    </div>
+
+    <!-- Immortality -->
+    <div class="bg-white p-4 rounded shadow flex items-start space-x-4">
+      <img src="https://static.wikia.nocookie.net/mobile-legends/images/8/85/Immortality.png" alt="Immortality" class="w-16 h-16 rounded">
+      <div>
+        <h2 class="font-semibold text-lg">Immortality</h2>
+        <p>Memberi kesempatan hidup kembali. Sering dipakai di late game oleh semua role untuk survivabilitas.</p>
+      </div>
+    </div>
+
+    <!-- Clock of Destiny -->
+    <div class="bg-white p-4 rounded shadow flex items-start space-x-4">
+      <img src="https://static.wikia.nocookie.net/mobile-legends/images/8/86/Clock_of_Destiny.png" alt="Clock of Destiny" class="w-16 h-16 rounded">
+      <div>
+        <h2 class="font-semibold text-lg">Clock of Destiny</h2>
+        <p>Item scaling untuk mage. Memberikan magic power, HP, dan mana semakin lama game berlangsung.</p>
+      </div>
+    </div>
+
+    <!-- Lightning Truncheon -->
+    <div class="bg-white p-4 rounded shadow flex items-start space-x-4">
+      <img src="https://static.wikia.nocookie.net/mobile-legends/images/3/3f/Lightning_Truncheon.png" alt="Lightning Truncheon" class="w-16 h-16 rounded">
+      <div>
+        <h2 class="font-semibold text-lg">Lightning Truncheon</h2>
+        <p>Combo ideal dengan Clock of Destiny. Memberikan magic burst damage ke beberapa target sekaligus.</p>
+      </div>
+    </div>
+
+    <!-- Holy Crystal -->
+    <div class="bg-white p-4 rounded shadow flex items-start space-x-4">
+      <img src="https://static.wikia.nocookie.net/mobile-legends/images/f/f6/Holy_Crystal.png" alt="Holy Crystal" class="w-16 h-16 rounded">
+      <div>
+        <h2 class="font-semibold text-lg">Holy Crystal</h2>
+        <p>Memberi magic power besar dan scaling tambahan. Cocok untuk mage burst seperti Pharsa atau Eudora.</p>
+      </div>
+    </div>
+
+    <!-- Genius Wand -->
+    <div class="bg-white p-4 rounded shadow flex items-start space-x-4">
+      <img src="https://static.wikia.nocookie.net/mobile-legends/images/4/42/Genius_Wand.png" alt="Genius Wand" class="w-16 h-16 rounded">
+      <div>
+        <h2 class="font-semibold text-lg">Genius Wand</h2>
+        <p>Memberi magic penetration dan efek mengurangi magic defense lawan. Cocok untuk mage poke.</p>
+      </div>
+    </div>
+
+    <!-- Glowing Wand -->
+    <div class="bg-white p-4 rounded shadow flex items-start space-x-4">
+      <img src="https://static.wikia.nocookie.net/mobile-legends/images/6/6e/Glowing_Wand.png" alt="Glowing Wand" class="w-16 h-16 rounded">
+      <div>
+        <h2 class="font-semibold text-lg">Glowing Wand</h2>
+        <p>Memberi efek burn. Efektif melawan hero tanky atau sustain tinggi seperti Uranus.</p>
+      </div>
+    </div>
+
+    <!-- Ice Queen Wand -->
+    <div class="bg-white p-4 rounded shadow flex items-start space-x-4">
+      <img src="https://static.wikia.nocookie.net/mobile-legends/images/8/86/Ice_Queen_Wand.png" alt="Ice Queen Wand" class="w-16 h-16 rounded">
+      <div>
+        <h2 class="font-semibold text-lg">Ice Queen Wand</h2>
+        <p>Memberi efek slow dari skill. Cocok untuk mage support seperti Angela atau Valir.</p>
+      </div>
+    </div>
+
+    <!-- Concentrated Energy -->
+    <div class="bg-white p-4 rounded shadow flex items-start space-x-4">
+      <img src="https://static.wikia.nocookie.net/mobile-legends/images/4/4e/Concentrated_Energy.png" alt="Concentrated Energy" class="w-16 h-16 rounded">
+      <div>
+        <h2 class="font-semibold text-lg">Concentrated Energy</h2>
+        <p>Menambah spell vamp dan regen HP dari skill. Cocok untuk mage sustain seperti Alice dan Lunox.</p>
+      </div>
+    </div>
+
+    <!-- Bloodlust Axe -->
+    <div class="bg-white p-4 rounded shadow flex items-start space-x-4">
+      <img src="https://static.wikia.nocookie.net/mobile-legends/images/5/5e/Bloodlust_Axe.png" alt="Bloodlust Axe" class="w-16 h-16 rounded">
+      <div>
+        <h2 class="font-semibold text-lg">Bloodlust Axe</h2>
+        <p>Spell vamp untuk hero physical skill. Cocok untuk Alucard, Lapu-Lapu, dan Yu Zhong.</p>
+      </div>
+    </div>
+
+    <!-- War Axe -->
+    <div class="bg-white p-4 rounded shadow flex items-start space-x-4">
+      <img src="https://static.wikia.nocookie.net/mobile-legends/images/b/b6/War_Axe.png" alt="War Axe" class="w-16 h-16 rounded">
+      <div>
+        <h2 class="font-semibold text-lg">War Axe</h2>
+        <p>Memberikan stacking damage dan cooldown reduction. Efektif untuk jungler fighter.</p>
+      </div>
+    </div>
+
+    <!-- Hunter Strike -->
+    <div class="bg-white p-4 rounded shadow flex items-start space-x-4">
+      <img src="https://static.wikia.nocookie.net/mobile-legends/images/2/28/Hunter_Strike.png" alt="Hunter Strike" class="w-16 h-16 rounded">
+      <div>
+        <h2 class="font-semibold text-lg">Hunter Strike</h2>
+        <p>Cooldown reduction dan bonus movement speed. Cocok untuk assassin dan roamer.</p>
+      </div>
+    </div>
+
+    <!-- Malefic Roar -->
+    <div class="bg-white p-4 rounded shadow flex items-start space-x-4">
+      <img src="https://static.wikia.nocookie.net/mobile-legends/images/f/fe/Malefic_Roar.png" alt="Malefic Roar" class="w-16 h-16 rounded">
+      <div>
+        <h2 class="font-semibold text-lg">Malefic Roar</h2>
+        <p>Memberi physical penetration besar. Efektif menembus armor tank lawan.</p>
+      </div>
+    </div>
+
+    <!-- Sea Halberd -->
+    <div class="bg-white p-4 rounded shadow flex items-start space-x-4">
+      <img src="https://static.wikia.nocookie.net/mobile-legends/images/f/f2/Sea_Halberd.png" alt="Sea Halberd" class="w-16 h-16 rounded">
+      <div>
+        <h2 class="font-semibold text-lg">Sea Halberd</h2>
+        <p>Efek anti regen. Efektif melawan Esmeralda, Uranus, dan Ruby.</p>
+      </div>
+    </div>
+
+    <!-- Dominance Ice -->
+    <div class="bg-white p-4 rounded shadow flex items-start space-x-4">
+      <img src="https://static.wikia.nocookie.net/mobile-legends/images/3/34/Dominance_Ice.png" alt="Dominance Ice" class="w-16 h-16 rounded">
+      <div>
+        <h2 class="font-semibold text-lg">Dominance Ice</h2>
+        <p>Mengurangi lifesteal, attack speed, dan regen lawan. Item wajib anti sustain.</p>
+      </div>
+    </div>
+
+    <!-- Oracle -->
+    <div class="bg-white p-4 rounded shadow flex items-start space-x-4">
+      <img src="https://static.wikia.nocookie.net/mobile-legends/images/b/b6/Oracle.png" alt="Oracle" class="w-16 h-16 rounded">
+      <div>
+        <h2 class="font-semibold text-lg">Oracle</h2>
+        <p>Meningkatkan regen HP dan efek shield. Cocok untuk hero sustain seperti Uranus atau Ruby.</p>
+      </div>
+    </div>
+
+    <!-- Antique Cuirass -->
+    <div class="bg-white p-4 rounded shadow flex items-start space-x-4">
+      <img src="https://static.wikia.nocookie.net/mobile-legends/images/2/2c/Antique_Cuirass.png" alt="Antique Cuirass" class="w-16 h-16 rounded">
+      <div>
+        <h2 class="font-semibold text-lg">Antique Cuirass</h2>
+        <p>Mengurangi physical damage yang diterima. Cocok untuk melawan marksman dan burst physical.</p>
+      </div>
+    </div>
+
+    <!-- Radiant Armor -->
+    <div class="bg-white p-4 rounded shadow flex items-start space-x-4">
+      <img src="https://static.wikia.nocookie.net/mobile-legends/images/b/bf/Radiant_Armor.png" alt="Radiant Armor" class="w-16 h-16 rounded">
+      <div>
+        <h2 class="font-semibold text-lg">Radiant Armor</h2>
+        <p>Anti magic damage berkelanjutan. Cocok untuk menghadapi Chang’e, Yve, dan Valir.</p>
+      </div>
+    </div>
+
+    <!-- Brute Force Breastplate -->
+    <div class="bg-white p-4 rounded shadow flex items-start space-x-4">
+      <img src="https://static.wikia.nocookie.net/mobile-legends/images/f/f5/Brute_Force_Breastplate.png" alt="Brute Force" class="w-16 h-16 rounded">
+      <div>
+        <h2 class="font-semibold text-lg">Brute Force Breastplate</h2>
+        <p>Armor stacking saat bergerak/menyerang. Cocok untuk fighter dan tank agresif.</p>
+      </div>
+    </div>
+
+    <!-- Cursed Helmet -->
+    <div class="bg-white p-4 rounded shadow flex items-start space-x-4">
+      <img src="https://static.wikia.nocookie.net/mobile-legends/images/d/d0/Cursed_Helmet.png" alt="Cursed Helmet" class="w-16 h-16 rounded">
+      <div>
+        <h2 class="font-semibold text-lg">Cursed Helmet</h2>
+        <p>Damage area ke musuh sekitar. Efektif untuk tank jungler seperti Baxia atau Belerick.</p>
+      </div>
+    </div>
+
+    <!-- Twilight Armor -->
+    <div class="bg-white p-4 rounded shadow flex items-start space-x-4">
+      <img src="https://static.wikia.nocookie.net/mobile-legends/images/f/f3/Twilight_Armor.png" alt="Twilight Armor" class="w-16 h-16 rounded">
+      <div>
+        <h2 class="font-semibold text-lg">Twilight Armor</h2>
+        <p>Membatasi damage besar dalam sekali pukul. Efektif melawan hero burst seperti Lesley dan Aldous.</p>
+      </div>
+    </div>
+
+    <!-- Rose Gold Meteor -->
+    <div class="bg-white p-4 rounded shadow flex items-start space-x-4">
+      <img src="https://static.wikia.nocookie.net/mobile-legends/images/7/7f/Rose_Gold_Meteor.png" alt="Rose Gold Meteor" class="w-16 h-16 rounded">
+      <div>
+        <h2 class="font-semibold text-lg">Rose Gold Meteor</h2>
+        <p>Shield darurat saat HP rendah. Co
