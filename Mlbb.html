@@ -5,22 +5,23 @@
   <title>Counter Hero MLBB (All Heroes)</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
 </head>
-<body class="bg-gray-100 min-h-screen p-4">  <div class="max-w-md mx-auto bg-white rounded-xl shadow-md p-4">
-    <h1 class="text-2xl font-extrabold text-blue-700 text-center mb-4">Counter Hero MLBB</h1><div class="flex space-x-2 mb-4">
-  <input id="search" type="text" placeholder="Cari hero..." class="flex-1 px-3 py-2 border rounded"/>
-  <select id="filterLane" class="px-3 py-2 border rounded">
-    <option value="">Semua Lane</option>
-    <option value="Gold">Gold Lane</option>
-    <option value="EXP">EXP Lane</option>
-    <option value="Mid">Mid Lane</option>
-    <option value="Jungle">Jungle</option>
-    <option value="Support">Support</option>
-    <option value="Tank">Tank</option>
-  </select>
-</div>
-
-<div id="heroContainer" class="space-y-4"></div>
-
+<body class="bg-gray-100 min-h-screen p-4">
+  <div class="max-w-2xl mx-auto bg-white rounded-xl shadow-md p-4">
+    <h1 class="text-2xl font-extrabold text-blue-700 text-center mb-4">Counter Hero MLBB</h1>
+    <div class="flex space-x-2 mb-4">
+      <input id="search" type="text" placeholder="Cari hero..." class="flex-1 px-3 py-2 border rounded"/>
+      <select id="filterLane" class="px-3 py-2 border rounded">
+        <option value="">Semua Lane</option>
+        <option value="Gold">Gold Lane</option>
+        <option value="EXP">EXP Lane</option>
+        <option value="Mid">Mid Lane</option>
+        <option value="Jungle">Jungle</option>
+        <option value="Support">Support</option>
+        <option value="Tank">Tank</option>
+      </select>
+    </div>
+    <p id="resultCount" class="text-sm text-gray-600 mb-2 text-right"></p>
+    <div id="heroContainer" class="space-y-4"></div>
   </div>  <script>
     const heroData = [
       { hero: "Granger", lane: "Gold", counter: ["Irithel","Moskov"] },
@@ -31,6 +32,12 @@
       { hero: "Moskov", lane: "Gold", counter: ["Brody", "Lesley"] },
       { hero: "Lesley", lane: "Gold", counter: ["Natalia", "Beatrix"] },
       { hero: "Karrie", lane: "Gold", counter: ["Wanwan", "Claude"] },
+      { hero: "Melissa", lane: "Gold", counter: ["Beatrix", "Lesley"] },
+      { hero: "Natan", lane: "Gold", counter: ["Clint", "Bruno"] },
+      { hero: "Irithel", lane: "Gold", counter: ["Claude", "Melissa"] },
+      { hero: "Hanabi", lane: "Gold", counter: ["Lesley", "Popol & Kupa"] },
+      { hero: "Popol & Kupa", lane: "Gold", counter: ["Beatrix", "Brody"] },
+
       { hero: "Lapu-Lapu", lane: "EXP", counter: ["Dyrroth","Alice"] },
       { hero: "Paquito", lane: "EXP", counter: ["Yu Zhong","Aldous"] },
       { hero: "Terizla", lane: "EXP", counter: ["Esmeralda","Thamuz"] },
@@ -41,6 +48,19 @@
       { hero: "Esmeralda", lane: "EXP", counter: ["Baxia", "Dyrroth"] },
       { hero: "Aldous", lane: "EXP", counter: ["Chou", "X.Borg"] },
       { hero: "Chou", lane: "EXP", counter: ["Paquito", "Lapu-Lapu"] },
+      { hero: "Leomord", lane: "EXP", counter: ["Esmeralda", "Chou"] },
+      { hero: "Fredrinn", lane: "EXP", counter: ["Dyrroth", "Yin"] },
+      { hero: "Arlott", lane: "EXP", counter: ["Yu Zhong", "Paquito"] },
+      { hero: "Yin", lane: "EXP", counter: ["Chou", "Martis"] },
+      { hero: "Guinevere", lane: "EXP", counter: ["Lylia", "Diggie"] },
+      { hero: "Minsitthar", lane: "EXP", counter: ["Chou", "Yu Zhong"] },
+      { hero: "Martis", lane: "EXP", counter: ["Yu Zhong", "Terizla"] },
+      { hero: "Khaleed", lane: "EXP", counter: ["Thamuz", "X.Borg"] },
+      { hero: "Silvanna", lane: "EXP", counter: ["Chou", "Yu Zhong"] },
+      { hero: "Bane", lane: "EXP", counter: ["X.Borg", "Thamuz"] },
+      { hero: "Badang", lane: "EXP", counter: ["Yu Zhong", "Fredrinn"] },
+      { hero: "Uranus", lane: "EXP", counter: ["Esmeralda", "Dyrroth"] },
+
       { hero: "Valir", lane: "Mid", counter: ["Lylia","Natalia"] },
       { hero: "Lunox", lane: "Mid", counter: ["Kagura","Hayabusa"] },
       { hero: "Pharsa", lane: "Mid", counter: ["Hayabusa","Harith"] },
@@ -51,10 +71,16 @@
       { hero: "Kagura", lane: "Mid", counter: ["Valentina", "Yve"] },
       { hero: "Lylia", lane: "Mid", counter: ["Valentina", "Yve"] },
       { hero: "Valentina", lane: "Mid", counter: ["Lunox", "Gusion"] },
+      { hero: "Joy", lane: "Mid", counter: ["Pharsa", "Kaja"] },
+      { hero: "Julian", lane: "Mid", counter: ["Valir", "Gusion"] },
+      { hero: "Zhuxin", lane: "Mid", counter: ["Natalia", "Lunox"] },
+      { hero: "Novaria", lane: "Mid", counter: ["Yve", "Pharsa"] },
+      { hero: "Helena", lane: "Mid", counter: ["Lylia", "Harith"] },
+
       { hero: "Ling", lane: "Jungle", counter: ["Saber","Khufra"] },
       { hero: "Lancelot", lane: "Jungle", counter: ["Akai","Aurora"] },
       { hero: "Fanny", lane: "Jungle", counter: ["Khufra","Guinevere"] },
-      { hero: "Gusion", lane: "Jungle", counter: ["Chou","Chou"] },
+      { hero: "Gusion", lane: "Jungle", counter: ["Chou"] },
       { hero: "Karina", lane: "Jungle", counter: ["Baxia","Uranus"] },
       { hero: "Alucard", lane: "Jungle", counter: ["Belerick","Khufra"] },
       { hero: "Hayabusa", lane: "Jungle", counter: ["Saber", "Aurora"] },
@@ -62,6 +88,11 @@
       { hero: "Akai", lane: "Jungle", counter: ["Karrie", "Valir"] },
       { hero: "Helcurt", lane: "Jungle", counter: ["Jawhead", "Khufra"] },
       { hero: "Benedetta", lane: "Jungle", counter: ["Chou", "Natalia"] },
+      { hero: "Nolan", lane: "Jungle", counter: ["Benedetta", "Akai"] },
+      { hero: "Aamon", lane: "Jungle", counter: ["Hayabusa", "Saber"] },
+      { hero: "Aulus", lane: "Jungle", counter: ["Akai", "Baxia"] },
+      { hero: "Roger", lane: "Jungle", counter: ["Khufra", "Barats"] },
+
       { hero: "Angela", lane: "Support", counter: ["Ling","Selena"] },
       { hero: "Estes", lane: "Support", counter: ["Karina","Cyclops"] },
       { hero: "Tigreal", lane: "Support", counter: ["Harith","Grock"] },
@@ -71,40 +102,53 @@
       { hero: "Franco", lane: "Support", counter: ["Claude", "Beatrix"] },
       { hero: "Diggie", lane: "Support", counter: ["Tigreal", "Atlas"] },
       { hero: "Atlas", lane: "Support", counter: ["Diggie", "Chou"] },
+      { hero: "Chip", lane: "Support", counter: ["Atlas", "Angela"] },
+      { hero: "Floryn", lane: "Support", counter: ["Valentina", "Diggie"] },
+      { hero: "Carmilla", lane: "Support", counter: ["Diggie", "Selena"] },
+      { hero: "Faramis", lane: "Support", counter: ["Valir", "Pharsa"] },
+
       { hero: "Baxia", lane: "Tank", counter: ["Esmeralda", "Estes"] },
       { hero: "Grock", lane: "Tank", counter: ["Fanny", "Gusion"] },
-      { hero: "Uranus", lane: "EXP", counter: ["Esmeralda", "Dyrroth"] },
-      { hero: "Belerick", lane: "Tank", counter: ["Lancelot", "Gusion"] }
+      { hero: "Belerick", lane: "Tank", counter: ["Lancelot", "Gusion"] },
+      { hero: "Edith", lane: "Tank", counter: ["Esmeralda", "Harith"] },
+      { hero: "Barats", lane: "Tank", counter: ["Dyrroth", "X.Borg"] },
+      { hero: "Johnson", lane: "Tank", counter: ["Chou", "Akai"] },
+      { hero: "Hylos", lane: "Tank", counter: ["Karrie", "Valir"] },
+      { hero: "Minotaur", lane: "Tank", counter: ["Diggie", "Grock"] }
     ];
 
     const container = document.getElementById("heroContainer");
     const searchInput = document.getElementById("search");
     const filterLane = document.getElementById("filterLane");
+    const resultCount = document.getElementById("resultCount");
 
     function render() {
       const keyword = searchInput.value.toLowerCase();
       const lane = filterLane.value;
       container.innerHTML = "";
 
-      heroData
-        .filter(h =>
-          (!lane || h.lane === lane) &&
-          (!keyword || h.hero.toLowerCase().includes(keyword))
-        )
-        .forEach(h => {
-          const card = document.createElement("div");
-          card.className = "bg-gray-50 rounded-lg p-3 shadow-sm";
+      const filtered = heroData.filter(h =>
+        (!lane || h.lane === lane) &&
+        (!keyword || h.hero.toLowerCase().includes(keyword))
+      );
 
-          card.innerHTML = `
-            <h3 class="text-lg font-semibold">${h.hero}</h3>
-            <p class="text-sm text-gray-500 mb-1">${h.lane} Lane</p>
-            <p class="text-sm"><span class="font-bold text-red-500">Counter:</span> ${h.counter.join(", ")}</p>
-          `;
-          container.appendChild(card);
-        });
+      resultCount.textContent = `${filtered.length} hero ditemukan`;
 
-      if (container.innerHTML === "") {
+      filtered.forEach(h => {
+        const card = document.createElement("div");
+        card.className = "bg-gray-50 rounded-lg p-3 shadow-sm";
+
+        card.innerHTML = `
+          <h3 class="text-lg font-semibold">${h.hero}</h3>
+          <p class="text-sm text-gray-500 mb-1">${h.lane} Lane</p>
+          <p class="text-sm"><span class="font-bold text-red-500">Counter:</span> ${h.counter.join(", ")}</p>
+        `;
+        container.appendChild(card);
+      });
+
+      if (filtered.length === 0) {
         container.innerHTML = "<p class='text-center text-gray-500'>Tidak ada hero sesuai filter.</p>";
+        resultCount.textContent = "0 hero ditemukan";
       }
     }
 
@@ -113,4 +157,4 @@
 
     render();
   </script></body>
-</html>
+  </html>
