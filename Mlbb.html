@@ -1,60 +1,97 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Belajar MLBB</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Counter Hero MLBB (All Heroes)</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
 </head>
-<body class="bg-gray-100 min-h-screen flex items-center justify-center px-4 py-6">
+<body class="bg-gray-100 min-h-screen p-4">
 
-  <div class="bg-white rounded-xl shadow-md w-full max-w-sm p-4 space-y-6">
-    <h1 class="text-2xl font-extrabold text-blue-700 text-center">Belajar MLBB</h1>
-    <h2 class="text-base font-semibold text-gray-700">🎯 Counter Hero:</h2>
+  <div class="max-w-md mx-auto bg-white rounded-xl shadow-md p-4">
+    <h1 class="text-2xl font-extrabold text-blue-700 text-center mb-4">Counter Hero MLBB</h1>
 
-    <!-- GOLD LANE -->
-    <div>
-      <p class="text-sm text-gray-600 font-medium mb-2">📍 <span class="font-semibold">Gold Lane</span></p>
-      <ul class="list-disc list-inside text-sm text-gray-700 space-y-1">
-        <li><span class="text-red-500 font-bold">Grangger</span> dicounter oleh <span class="text-green-600 font-bold">Irithel</span></li>
-        <li><span class="text-red-500 font-bold">Wanwan</span> dicounter oleh <span class="text-green-600 font-bold">Popol dan Kupa</span></li>
-        <li><span class="text-red-500 font-bold">Brody</span> dicounter oleh <span class="text-green-600 font-bold">Wanwan</span></li>
-        <li><span class="text-red-500 font-bold">Beatrix</span> dicounter oleh <span class="text-green-600 font-bold">Lesley</span></li>
-        <li><span class="text-red-500 font-bold">Claude</span> dicounter oleh <span class="text-green-600 font-bold">Moskov</span></li>
-        <li><span class="text-red-500 font-bold">Melissa</span> dicounter oleh <span class="text-green-600 font-bold">Karrie</span></li>
-      </ul>
+    <div class="flex space-x-2 mb-4">
+      <input id="search" type="text" placeholder="Cari hero..." class="flex-1 px-3 py-2 border rounded"/>
+      <select id="filterLane" class="px-3 py-2 border rounded">
+        <option value="">Semua Lane</option>
+        <option value="Gold">Gold Lane</option>
+        <option value="EXP">EXP Lane</option>
+        <option value="Mid">Mid Lane</option>
+        <option value="Jungle">Jungle</option>
+        <option value="Support">Support</option>
+      </select>
     </div>
 
-    <!-- EXP LANE -->
-    <div>
-      <p class="text-sm text-gray-600 font-medium mb-2">📍 <span class="font-semibold">EXP Lane</span></p>
-      <ul class="list-disc list-inside text-sm text-gray-700 space-y-1">
-        <li><span class="text-red-500 font-bold">Lapu-Lapu</span> dicounter oleh <span class="text-green-600 font-bold">Dyrroth</span></li>
-        <li><span class="text-red-500 font-bold">Paquito</span> dicounter oleh <span class="text-green-600 font-bold">Yu Zhong</span></li>
-        <li><span class="text-red-500 font-bold">Terizla</span> dicounter oleh <span class="text-green-600 font-bold">Esmeralda</span></li>
-      </ul>
-    </div>
-
-    <!-- MID LANE -->
-    <div>
-      <p class="text-sm text-gray-600 font-medium mb-2">📍 <span class="font-semibold">Mid Lane</span></p>
-      <ul class="list-disc list-inside text-sm text-gray-700 space-y-1">
-        <li><span class="text-red-500 font-bold">Valir</span> dicounter oleh <span class="text-green-600 font-bold">Lylia</span></li>
-        <li><span class="text-red-500 font-bold">Lunox</span> dicounter oleh <span class="text-green-600 font-bold">Kagura</span></li>
-        <li><span class="text-red-500 font-bold">Pharsa</span> dicounter oleh <span class="text-green-600 font-bold">Hayabusa</span></li>
-      </ul>
-    </div>
-
-    <!-- JUNGLE -->
-    <div>
-      <p class="text-sm text-gray-600 font-medium mb-2">📍 <span class="font-semibold">Jungle</span></p>
-      <ul class="list-disc list-inside text-sm text-gray-700 space-y-1">
-        <li><span class="text-red-500 font-bold">Ling</span> dicounter oleh <span class="text-green-600 font-bold">Saber</span></li>
-        <li><span class="text-red-500 font-bold">Lancelot</span> dicounter oleh <span class="text-green-600 font-bold">Akai</span></li>
-        <li><span class="text-red-500 font-bold">Fanny</span> dicounter oleh <span class="text-green-600 font-bold">Khufra</span></li>
-      </ul>
-    </div>
+    <div id="heroContainer" class="space-y-4"></div>
   </div>
 
+  <script>
+    const heroData = [
+      { hero: "Granger", lane: "Gold", counter: ["Irithel","Moskov"] },
+      { hero: "Wanwan", lane: "Gold", counter: ["Popol & Kupa","Lesley"] },
+      { hero: "Brody", lane: "Gold", counter: ["Wanwan","Claude"] },
+      { hero: "Beatrix", lane: "Gold", counter: ["Lesley","Natalia"] },
+      { hero: "Claude", lane: "Gold", counter: ["Moskov","Karrie"] },
+      { hero: "Lapu-Lapu", lane: "EXP", counter: ["Dyrroth","Alice"] },
+      { hero: "Paquito", lane: "EXP", counter: ["Yu Zhong","Aldous"] },
+      { hero: "Terizla", lane: "EXP", counter: ["Esmeralda","Thamuz"] },
+      { hero: "Dyrroth", lane: "EXP", counter: ["Alpha","Baxia"] },
+      { hero: "X.Borg", lane: "EXP", counter: ["Thamuz","Benedetta"] },
+      { hero: "Valir", lane: "Mid", counter: ["Lylia","Natalia"] },
+      { hero: "Lunox", lane: "Mid", counter: ["Kagura","Hayabusa"] },
+      { hero: "Pharsa", lane: "Mid", counter: ["Hayabusa","Harith"] },
+      { hero: "Yve", lane: "Mid", counter: ["Natalia","Vale"] },
+      { hero: "Cecilion", lane: "Mid", counter: ["Harith","Kagura"] },
+      { hero: "Ling", lane: "Jungle", counter: ["Saber","Khufra"] },
+      { hero: "Lancelot", lane: "Jungle", counter: ["Akai","Aurora"] },
+      { hero: "Fanny", lane: "Jungle", counter: ["Khufra","Guinevere"] },
+      { hero: "Gusion", lane: "Jungle", counter: ["Chou","Chou"] },
+      { hero: "Karina", lane: "Jungle", counter: ["Baxia","Uranus"] },
+      { hero: "Alucard", lane: "Jungle", counter: ["Belerick","Khufra"] },
+      { hero: "Angela", lane: "Support", counter: ["Ling","Selena"] },
+      { hero: "Estes", lane: "Support", counter: ["Karina","Cyclops"] },
+      { hero: "Tigreal", lane: "Support", counter: ["Harith","Groove"] },
+      { hero: "Rafaela", lane: "Support", counter: ["Helcurt","Valentina"] }
+      // Tambahkan lebih banyak hero di sini...
+    ];
+
+    const container = document.getElementById("heroContainer");
+    const searchInput = document.getElementById("search");
+    const filterLane = document.getElementById("filterLane");
+
+    function render() {
+      const keyword = searchInput.value.toLowerCase();
+      const lane = filterLane.value;
+      container.innerHTML = "";
+
+      heroData
+        .filter(h => 
+          (!lane || h.lane === lane) &&
+          (!keyword || h.hero.toLowerCase().includes(keyword))
+        )
+        .forEach(h => {
+          const card = document.createElement("div");
+          card.className = "bg-gray-50 rounded-lg p-3 shadow-sm";
+
+          card.innerHTML = `
+            <h3 class="text-lg font-semibold">${h.hero}</h3>
+            <p class="text-sm text-gray-500 mb-1">${h.lane} Lane</p>
+            <p class="text-sm"><span class="font-bold text-red-500">Counter:</span> ${h.counter.join(", ")}</p>
+          `;
+          container.appendChild(card);
+        });
+
+      if (container.innerHTML === "") {
+        container.innerHTML = "<p class='text-center text-gray-500'>Tidak ada hero sesuai filter.</p>";
+      }
+    }
+
+    searchInput.addEventListener("input", render);
+    filterLane.addEventListener("change", render);
+
+    render();
+  </script>
+
 </body>
-  </html>
+</html>
